@@ -1,4 +1,5 @@
 import turtle
+import time
 
 
 wn=turtle.Screen()
@@ -6,6 +7,7 @@ wn.title("Pong by GentritC")
 wn.bgcolor("lightgrey")
 wn.setup(width=800, height=600)
 wn.tracer(0)
+
 
 #score
 score_a=0
@@ -36,8 +38,11 @@ ball.shape("circle")
 ball.color("orange")
 ball.penup()
 ball.goto(0,0)
-ball.dx=0.3
-ball.dy=0.3
+ball.dx=0.4
+ball.dy=0.4
+
+            
+
 
 #pen
 pen=turtle.Turtle()
@@ -53,22 +58,35 @@ pen.write("Player A:0  Player B:0", align="center",font=("Arial",16,"normal"))
 #Function
 def paddle_a_up():
     y=paddle_a.ycor()
-    y+=15
+    if (y>=300-40):
+        y=300-40
+    else:
+        y+=20
+        
     paddle_a.sety(y)
 
 def paddle_a_down():
     y=paddle_a.ycor()
-    y-=15
+    if (y<=-300+40+20):
+        y=-300+40+20
+    else:
+        y-=20
     paddle_a.sety(y)
 
 def paddle_b_up():
     y=paddle_b.ycor()
-    y+=15
+    if (y>=300-40):
+        y=300-40
+    else:
+        y+=20
     paddle_b.sety(y)
 
 def paddle_b_down():
     y=paddle_b.ycor()
-    y-=15
+    if (y<=-300+40+20):
+        y=-300+40+20
+    else:
+        y-=20
     paddle_b.sety(y)
 
 # #Keyboard
@@ -96,7 +114,7 @@ while True:
     if ball.xcor()>390:
         ball.goto(0,0)
         ball.dx*=-1
-        score_b+=1
+        score_a+=1
         pen.clear()
         pen.write("Player A:{}  Player B:{}".format(score_a,score_b), align="center",font=("Arial",16,"normal"))
         
@@ -105,14 +123,18 @@ while True:
     if ball.xcor()<-390:
         ball.goto(0,0)
         ball.dx*=-1
-        score_a+=1
+        score_b+=1
         pen.clear()
         pen.write("Player A:{}  Player B:{}".format(score_a,score_b), align="center",font=("Arial",16,"normal"))
 
     #ball and paddle collision
-    if (ball.xcor()>335 and ball.xcor()<350) and (ball.ycor()<paddle_b.ycor()+40 and ball.ycor()>paddle_b.ycor()-40):
+    if (ball.xcor()>335 and ball.xcor()<355) and (ball.ycor()<paddle_b.ycor()+60 and ball.ycor()>paddle_b.ycor()-60):
         ball.setx(335)
         ball.dx*=-1
-    if (ball.xcor()<-335 and ball.xcor()>-350) and (ball.ycor()<paddle_a.ycor()+40 and ball.ycor()>paddle_a.ycor()-40):
+    if (ball.xcor()<-335 and ball.xcor()>-355) and (ball.ycor()<paddle_a.ycor()+60 and ball.ycor()>paddle_a.ycor()-60):
         ball.setx(-335)
         ball.dx*=-1
+
+
+
+        
